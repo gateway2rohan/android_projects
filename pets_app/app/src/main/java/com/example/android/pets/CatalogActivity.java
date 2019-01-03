@@ -60,6 +60,16 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     /**
+     * after finishing editorActivity,
+     * this method helps to reload this activity with newly added content
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayDatabaseInfo();
+    }
+
+    /**
      * Temporary helper method to display information in the onscreen TextView about the state of
      * the pets database.
      */
