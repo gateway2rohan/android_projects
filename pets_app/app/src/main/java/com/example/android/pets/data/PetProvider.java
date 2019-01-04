@@ -138,7 +138,18 @@ public class PetProvider extends ContentProvider {
      */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+        switch (match){
+            case PETS:
+                return database.delete(PetContract.PetEntry.TABLE_NAME,s,strings);
+            case PET_ID:
+                s = PetContract.PetEntry._ID + "=?";
+                strings = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return database.delete(PetContract.PetEntry.TABLE_NAME,s,strings);
+            default:
+                throw new IllegalArgumentException("Delete is not supported for " + uri);
+        }
     }
 
     /**
@@ -182,7 +193,7 @@ public class PetProvider extends ContentProvider {
         if (contentValues.containsKey(PetContract.PetEntry.COLUMN_PET_WEIGHT)){
             Integer weight = contentValues.getAsInteger(PetContract.PetEntry.COLUMN_PET_WEIGHT);
             if (weight != null && weight <0){
-                throw new IllegalArgumentException("Pet requires valid weight.");   
+                throw new IllegalArgumentException("Pet requires valid weight.");
             }
         }
 
