@@ -119,14 +119,21 @@ public class CatalogActivity extends AppCompatActivity {
             // Figure out the index of each column
             int idColumnIndex = cursor.getColumnIndex(PetContract.PetEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_NAME);
+            int breedColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_BREED);
+            int genderColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_GENDER);
+            int weightColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_WEIGHT);
 
             while (cursor.moveToNext()) {
                 // Use that index to extract the String or Int value of the word
                 // at the current row the cursor is on.
                 int currentId = cursor.getInt(idColumnIndex);
                 String currentName = cursor.getString(nameColumnIndex);
+                String currentBreed = cursor.getString(breedColumnIndex);
+                int currentGender = cursor.getInt(genderColumnIndex);
+                int currentWeight = cursor.getInt(weightColumnIndex);
                 // Display the values from each column of the current row in the cursor in the TextView
-                displayView.append("\n" + currentId + " - " + currentName);
+                displayView.append("\n" + currentId + " - " + currentName + " - " + currentBreed
+                                    +" - " + currentGender + " - " + currentGender + " - " + currentWeight + "\n");
 
             }
         }finally {
