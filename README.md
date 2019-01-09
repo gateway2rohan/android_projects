@@ -1,1 +1,1 @@
-# udacity_android_projects
+# android_projects
